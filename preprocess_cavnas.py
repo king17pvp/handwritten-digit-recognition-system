@@ -7,7 +7,7 @@ import seaborn as sns
 x0 = [-1, 1, 0, 0]
 y0 = [0, 0, -1, 1]
 
-class ImageProcessor():
+class CanvasProcessor():
 
     def __init__(self):
         '''
@@ -30,7 +30,17 @@ class ImageProcessor():
         self.unflattened_img = None
         
     def dfs(self, a, m, n, x, y, label):
-        #Dfs to find every digits on canvas
+        '''
+        METHOD DESCRIPTION:
+        DFS on a digit to locate upper left corner and lower right corner of that digit
+        Through (self.min_x, self.min_y) and (self.max_x, self.max_y) To find the bounding 
+        box
+        
+        Variables:
+            a: canvas pixel matrix
+            m, n: Size of canvas
+            x, y: starting location for DFS
+        '''
         global x0
         global y0
         #Initialize a stack
@@ -64,7 +74,17 @@ class ImageProcessor():
     
     #Fit the image from canvas to process, separating into different 28x28 pixel images
     def fit(self, img):
-
+        '''
+        METHOD DESCRIPTION:
+        Perform processing step on the image retrieved from canvas.
+        Save those data in:
+            self.processed_img: array of (, 784) vectors
+            self.unflattened_img: array of (28, 28, 1) size image
+    
+        Variables: 
+            img: Image retrieved from canvas
+        '''
+        
         #Initialize variables before performing DFS
         m, n = img.shape
         self.vst = np.zeros(img.shape)
@@ -79,19 +99,28 @@ class ImageProcessor():
                     self.max_x, self.max_y = 0, 0
                     self.num_label += 1
                     
+                    #Find bounding box via DFS
                     self.dfs(img, m, n, i, j, self.num_label)
                     self.contours.append((self.min_x, self.min_y, self.max_x, self.max_y))
                     
-        #Adding bounding boxes of each digit to contour
-        
+        #Perform digit segmentation to take out array of (, 784) vectors and array of (28, 28, 1) images
         data, img_data = self.digit_segmentation(img, self.num_label, self.contours)
         self.processed_img, self.unflattened_img = data, img_data
         
     def digit_segmentation(self, a, num_label, contours):
-        
         '''
-        res: array of (784, 1) size vectors
-        res2: array of (28, 28, 1) size images
+        METHOD DESCRIPTION:
+            Performing preprocess each digit to fit MNIST format.
+        Variables:
+            a: pixel matrix retrieved from canvas
+            num_label: Number of digits
+            contours: Array of bounding box coordinates
+
+            res: array of (, 784) size vectors
+            res2: array of (28, 28, 1) size images
+        Return:
+            res: array of (, 784) size vectors
+            res2: array of (28, 28, 1) size images
         '''
 
         res = []
@@ -110,34 +139,37 @@ class ImageProcessor():
             #Put it into a square image
             processed_img = resize_my_version(img)
             
-            #Reshape the processed image then append it
+            #Reshape the processed image then append it to return arrays
             res2.append(processed_img.reshape(28, 28, 1))
             image_np = processed_img.reshape(1, 784).squeeze()
             res.append(image_np)
 
         return np.array(res), np.array(res2)
-    
-    def display(self):
-        fig, ax = plt.subplots(nrows = 3, ncols = 3, figsize = (12, 12))
-        cur_label = 0
-        for i in range(3):
-            for j in range(3):
-                if cur_label == self.num_label:
-                    continue
-                ax[i, j].imshow(self.unflattened_img[cur_label], cmap = 'gray')
-                ax[i, j].axis("off")
-                
-                cur_label += 1
-        plt.show()
 
 def resize_my_version(img):
+    '''
+    METHOD DESCRIPTION:
+    Resizing img to (28, 28) shape without distortion
+    
+    Variables:
+        img: Image of the digit
+    Return:
+        image_resized: Resized image of that digit
+    '''
     height, width = img.shape
-
+    
+    #Get square of zeros (black color)
     x = height if height > width else width
     y = height if height > width else width
     square= np.zeros((x,y), np.uint8)
+    
+    #Add the given image of digit to the center square
     square[int((y-height)/2):int(y-(y-height)/2), int((x-width)/2):int(x-(x-width)/2)] = img
+    
+    #Resize image to (20, 20)
     image_resized = cv2.resize(square, (20, 20), interpolation=cv2.INTER_LINEAR)
+    
+    #Add padding of 4 to image so that it has size (28, 28)
     padding_horizontal = np.zeros((image_resized.shape[0], 4)).astype(np.uint8)
     padding_vertical = np.zeros((4, 28)).astype(np.uint8)
     image_resized = np.concatenate((padding_horizontal, image_resized, padding_horizontal), axis = 1)

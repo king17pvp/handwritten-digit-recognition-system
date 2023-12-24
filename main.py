@@ -14,29 +14,35 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path = dir_path.replace('\\', '/') + '/'
 
-#Initializing models         
+#Initializing models
+
+#Loading weights for MLP         
 weight = np.load(dir_path + "weight/MNIST_ver3.npy", allow_pickle=True).tolist()
 NN = Model()
 NN.fit(weight, 4)
+
+#Load model for CNN
 CNN = load_model(dir_path + "weight/final_model.h5")
+
+#Load KNN model
 KNN = KNNModel(7)
 KNN.fit()
 
-# Define colors
+# Define colors to be used
 CANVAS_BG_COLOR = "black"
 PEN_COLOR = "white"
 ct.set_appearance_mode("black")
-
 
 #Create a new window with fixed resolution
 root = ct.CTk()
 root.geometry("1280x720")
 root.title("Recognizing Hand-written Digits")
 
-#Create a canvas and a sidebar frame for drawing
+#Create a canvas for drawing
 canvas = ct.CTkCanvas(master=root, width=1000, height=720, bg=CANVAS_BG_COLOR)
 canvas.pack(side="right", fill="both", expand=True)
 
+#Create a sidebar frame for 5 buttons
 sidebar_frame = ct.CTkFrame(master=root, width=280, corner_radius=10, fg_color=CANVAS_BG_COLOR)
 sidebar_frame.pack(side="left", fill="y")
 
@@ -52,11 +58,19 @@ def clear_canvas():
 last_x, last_y = 0, 0
 
 def activate_event(event):
+    '''
+    METHOD DESCRIPTION:
+    Function to activate drawing using computer mouse
+    '''
     global last_x, last_y
     canvas.bind("<B1-Motion>", draw_lines)
     last_x, last_y = event.x, event.y
 
 def draw_lines(event):
+    '''
+    METHOD DESCRIPTION:
+    Function to draw a line
+    '''
     global last_x, last_y
     x, y = event.x, event.y
     canvas.create_line((last_x, last_y, x, y), width=10, fill='white', capstyle=ROUND, smooth=TRUE, splinesteps=12)
@@ -87,7 +101,7 @@ def processCanvas(cv):
     output_img = img.copy()
     
     #Feed it through the processor
-    processor = ImageProcessor()
+    processor = CanvasProcessor()
     processor.fit(img_dilation)
     
     processed_img = processor.processed_img
@@ -99,7 +113,7 @@ def processCanvas(cv):
 def show_bounding_box():
     '''
     METHOD DESCRIPTION:
-    Showing the bounding box of each digit in canvas after being processed
+    Showing the bounding box of each digit in canvas after being segmentated
     '''
     processed_img, contours, output_img, unflattened_img = processCanvas(canvas)
     
@@ -115,7 +129,9 @@ def show_bounding_box():
 def recognize_digit_knn():
     '''
     METHOD DESCRIPTION:
-    Predict the image using KNN
+    Predict each digit in the image using KNN
+    
+    It will print out predicted number with bounding box of each digit
     '''
     processed_img, contours, output_img, unflattened_img = processCanvas(canvas)
     #pred = NN.predict(processed_img / 255)
@@ -143,6 +159,8 @@ def recognize_digit_cnn():
     '''
     METHOD DESCRIPTION:
     Predict the image using CNN
+    
+    It will print out predicted number with bounding box of each digit with probability prediction
     '''
     processed_img, contours, output_img, unflattened_img = processCanvas(canvas)
     unflattened_img = unflattened_img.reshape(len(contours), 28, 28, 1)
@@ -172,6 +190,8 @@ def recognize_digit_mlp():
     '''
     METHOD DESCRIPTION:
     Predict the image using MLP
+    
+    It will print out predicted number with bounding box of each digit with probability prediction
     '''
     #Taking necessaries from processing canvas
     processed_img, contours, output_img, unflattened_img = processCanvas(canvas)
