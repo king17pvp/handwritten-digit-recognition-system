@@ -3,7 +3,7 @@ Handwritten digits recognition system using K-nearest neighbors, Multilayer Perc
 
 # How to use: 
 To use this project using git, please do the following.
-First, clone the main branch of the repository into your desire directory.
+First, clone the main branch of the repository into your desire directory using your git command prompt.
 
 ```git clone -b main https://github.com/king17pvp/handwritten-digit-recognition-system.git```
 
