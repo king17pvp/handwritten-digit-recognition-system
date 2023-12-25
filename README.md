@@ -6,7 +6,9 @@ The project will allow you to draw digits on the canvas using the computer's mou
 
 There will be 5 buttons. In which three buttons to predict digits using three different approaches. One button to clear canvas, and one to show the bounding box of each digit.
 
-![test](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction.png, "test1") ![test2](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction2.png, "test2")
+| Cat pics                            | Dog pics                            |
+| ----------------------------------- | ----------------------------------- |
+| ![cat]([https://example.com/cat.png](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction.png?raw=true)) | ![dog]([https://example.com/dog.png](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction2.png?raw=true)) |
 
 ## Requirement
 To run this project, you must have Python version >= 3.5 installed. It is also highly recommended that you have Path Length Limit disabled. Which will avoid any issues when installing the necessary libraries to run the project.
