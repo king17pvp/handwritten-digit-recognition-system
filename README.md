@@ -37,7 +37,7 @@ To use this project using git, please do the following.
 ```python main.py```
 
 ## Details about three implementations
-All of the configurations that are implemented in this project were from our experimental notebook on Google Colab. You can review all the code and the output of those .ipynb files for more information.
+All of the configurations that are implemented in this project were from our experimental notebook on Google Colab. You can review all the code and the output of those .ipynb files in [Experimental notebooks](https://github.com/king17pvp/handwritten-digit-recognition-system/tree/main/experiment_notebook) for more information.
 
 After those experiments, we have summarized those results and implemented it into a simple UI.
 
