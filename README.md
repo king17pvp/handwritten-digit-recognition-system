@@ -7,8 +7,8 @@ The project will allow you to draw digits on the canvas using the computer's mou
 There will be 5 buttons. In which three buttons to predict digits using three different approaches. One button to clear canvas, and one to show the bounding box of each digit.
 
 <p align="center">
-  <img src="ExamplePrediction.png" alt = "UI" title = "UI with drawn digits" width="500" height="360" >
-  <img src="ExamplePrediction2.png" alt = "Prediction example with CNN" title = "Prediction example with CNN" width="500" height="360" >
+  <img src="ExamplePrediction.png" alt = "UI" title = "UI with drawn digits" width="400" height="270" >
+  <img src="ExamplePrediction2.png" alt = "Prediction example with CNN" title = "Prediction example with CNN" width="400" height="270" >
   
 </p>
 
