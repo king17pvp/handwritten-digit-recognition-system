@@ -28,6 +28,8 @@ To use this project using git, please do the following.
 ## Details about three implementations
 All of the configurations that are implemented in this project were from our experimental notebook on Google Colab. You can review all the code and the output of those .ipynb files for more information.
 
+After those experiments, we have summarized those results and implemented it into a simple UI.
+
 ### K-nearest neighbors
 We will implement with Gaussian weight and sigma value = 2 with K = 7.
 
