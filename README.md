@@ -8,7 +8,7 @@ There will be 5 buttons. In which three buttons to predict digits using three di
 
 | Cat pics                            | Dog pics                            |
 | ----------------------------------- | ----------------------------------- |
-| ![cat]([https://example.com/cat.png](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction.png?raw=true)) | ![dog]([https://example.com/dog.png](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction2.png?raw=true)) |
+| ![draw]([https://example.com/cat.png](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction.png?raw=true), "drawing") | ![predict]([https://example.com/dog.png](https://github.com/king17pvp/handwritten-digit-recognition-system/blob/main/ExamplePrediction2.png?raw=true),"prediction) |
 
 ## Requirement
 To run this project, you must have Python version >= 3.5 installed. It is also highly recommended that you have Path Length Limit disabled. Which will avoid any issues when installing the necessary libraries to run the project.
