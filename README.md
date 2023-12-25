@@ -39,8 +39,6 @@ To use this project using git, please do the following.
 ## Details about three implementations
 All of the configurations that are implemented in this project were from our experimental notebook on Google Colab. Those .ipynb files were downloaded and uploaded here. You can review all the code and the output of those .ipynb files in [Experimental notebooks](https://github.com/king17pvp/handwritten-digit-recognition-system/tree/main/experiment_notebook) for more information.
 
-After those experiments, we have summarized those results and implemented it into a simple UI.
-
 ### K-nearest neighbors
 We will implement with Gaussian weight and sigma value = 2 with K = 7.
 
