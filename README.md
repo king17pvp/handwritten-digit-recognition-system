@@ -18,7 +18,7 @@ There will be 5 buttons. In which three buttons to predict digits using three di
 
 
 ## Requirement
-To run this project, you must have Python version >= 3.5 installed. It is also highly recommended that you have Path Length Limit disabled. Which will avoid any issues when installing the necessary libraries to run the project.
+To run this project, you must have Python version >= 3.5 installed. It is also highly recommended that you have Path Length Limit disabled when installing Python. Which will avoid any issues when installing the necessary libraries to run the project.
 
 ## How to use: 
 To use this project using git, please do the following.
